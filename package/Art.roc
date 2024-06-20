@@ -1,4 +1,4 @@
-module [strToArt, lettersToArt, lettersToArtLines, strToLetters]
+module [strToArt, strToArtLines, strToArtTrimmed, lettersToArt, lettersToArtLines, strToLetters]
 
 import Letters exposing [AsciiLetter, emptyLetter, charToAsciiLetter]
 
@@ -6,6 +6,19 @@ strToArt : Str -> Str
 strToArt = \str ->
     strToLetters str
     |> lettersToArt
+
+strToArtLines : Str -> List Str
+strToArtLines = \str -> str |> strToLetters  |> lettersToArtLines
+
+strToArtTrimmed : Str -> Str
+strToArtTrimmed = \str ->
+    str 
+    |> strToArtLines  
+    |> List.walk [] \lines, l -> if List.isEmpty lines && Str.trim l |> Str.isEmpty then [] else List.append lines l
+    |> List.reverse
+    |> List.walk [] \lines, l -> if List.isEmpty lines && Str.trim l |> Str.isEmpty then [] else List.append lines l
+    |> List.reverse
+    |> Str.joinWith "\n"
 
 strToLetters : Str -> List AsciiLetter
 strToLetters = \str ->

@@ -10,7 +10,7 @@ import art.Art
 
 main : Task {} _
 main =
-    Stdout.line! ("ASCII-echo" |> Art.strToArt)
+    Stdout.line! ("ASCII-echo" |> Art.strToArtTrimmed)
     Stdout.write! "Enter some text: "
     input = Stdin.line! 
     Stdout.line! (input |> Art.strToArt)
