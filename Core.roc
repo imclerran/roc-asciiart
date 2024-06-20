@@ -69,7 +69,13 @@ getOverlap = \letter1, letter2 ->
             List.walkUntil row (0, ' ') \(edgePos, _), char -> 
                 if char == ' ' then Continue (edgePos + 1, char) else Break (edgePos, char)
     List.map2 edges1 edges2 \(pos1, ch1), (pos2, ch2) ->
-        if (ch1 == '\\' && ch2 == '/') || (ch1 == '/' && ch2 == '\\') then pos1 + pos2 else pos1 + pos2 + 1
+        if (ch1 == '\\' && ch2 == '/')
+        || (ch1 == '/' && ch2 == '\\') 
+        || (ch1 == '<' && (ch2 == '/' || ch2 == '\\')) 
+        || (ch2 == '>' && (ch1 == '/' || ch1 == '\\')) then 
+            pos1 + pos2 
+        else 
+            pos1 + pos2 + 1
     |> List.min
     |> Result.withDefault 0
             
@@ -98,6 +104,8 @@ expect
 characterPriority : U8 -> U8
 characterPriority = \c ->
     when c is
+        '<' -> 5
+        '>' -> 5
         '(' -> 4
         ')' -> 4
         '\\' -> 3
