@@ -314,10 +314,10 @@ apostrophe = {
     rows: [
         [' ', '_', ' '],
         ['(', ' ', ')'],
-        [' ', '\\', '|'],
+        ['|', '/', ' '],
         [' ', ' ', ' '],
         [' ', ' ', ' '],
-        [' ', ' ', ' '],        
+        [' ', ' ', ' '],       
     ],
     maxHeadOverlap: 3,
     maxTailOverlap: 3,
@@ -389,8 +389,8 @@ comma = {
         ['(', ' ', ')'],
         ['|', '/', ' '],
     ],
-    maxHeadOverlap: 1,
-    maxTailOverlap: 1,
+    maxHeadOverlap: 2,
+    maxTailOverlap: 2,
 }
 
 hyphen : AsciiLetter
