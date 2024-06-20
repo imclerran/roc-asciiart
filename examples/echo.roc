@@ -11,6 +11,9 @@ import art.Art
 main : Task {} _
 main =
     Stdout.line! ("ASCII-echo" |> Art.strToArtTrimmed)
+    Task.forever loop
+
+loop =
     Stdout.write! "Enter some text: "
     input = Stdin.line! 
     Stdout.line! (input |> Art.strToArt)
