@@ -3,3 +3,5 @@
 /char.txt
 /print
 /print.roc
+examples/*
+!examples/*.*
