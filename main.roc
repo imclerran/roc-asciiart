@@ -1,1 +1,1 @@
-package [Core, Letters] {}
+package [Art, Letters] {}

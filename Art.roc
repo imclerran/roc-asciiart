@@ -1,13 +1,18 @@
-module [lettersToStr, strToAsciiLetters]
+module [strToArt, lettersToArt, lettersToArtLines, strToLetters]
 
 import Letters exposing [AsciiLetter, emptyLetter, charToAsciiLetter]
 
+strToArt : Str -> Str
+strToArt = \str ->
+    strToLetters str
+    |> lettersToArt
 
-strToAsciiLetters = \str ->
+strToLetters : Str -> List AsciiLetter
+strToLetters = \str ->
     Str.toUtf8 str |> List.map \char -> charToAsciiLetter char
 
-lettersToStr : List AsciiLetter -> Str
-lettersToStr = \letters ->
+lettersToArtLines : List AsciiLetter -> List Str
+lettersToArtLines = \letters ->
     lettersJoined = List.walk letters emptyLetter \acc, letter ->
         overlap = List.min [getOverlap acc letter, acc.maxTailOverlap, letter.maxHeadOverlap] 
             |> Result.withDefault 0
@@ -32,7 +37,9 @@ lettersToStr = \letters ->
         (\row -> row
             |> Str.fromUtf8
             |> Result.withDefault "")
-    |> Str.joinWith "\n"
+   
+lettersToArt : List AsciiLetter -> Str
+lettersToArt = \letters -> lettersToArtLines letters |> Str.joinWith "\n"
 
 joinLetterRows : List U8, List U8, U8 -> List U8
 joinLetterRows = \row1, row2, overlap ->
