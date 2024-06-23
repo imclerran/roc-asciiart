@@ -248,8 +248,8 @@ quotationMark = {
         [' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' '],        
     ],
-    maxHeadOverlap: 2,
-    maxTailOverlap: 2,
+    maxHeadOverlap: 3,
+    maxTailOverlap: 3,
 }
 
 numberSign : AsciiLetter
