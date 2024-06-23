@@ -319,8 +319,8 @@ apostrophe = {
         [' ', ' ', ' '],
         [' ', ' ', ' '],       
     ],
-    maxHeadOverlap: 3,
-    maxTailOverlap: 3,
+    maxHeadOverlap: 2,
+    maxTailOverlap: 2,
 }
 
 roundOpenBracket : AsciiLetter
