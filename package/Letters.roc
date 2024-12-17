@@ -1,3 +1,11 @@
+## ```
+##  _         _   _                                 
+## | |    ___| |_| |_ ___ _ __ ___   _ __ ___   ___ 
+## | |   / _ \ __| __/ _ \ '__/ __| | '__/ _ \ / __|
+## | |__|  __/ |_| ||  __/ |  \__ \_| | | (_) | (__ 
+## |_____\___|\__|\__\___|_|  |___(_)_|  \___/ \___|
+## ```
+## Includes the AsciiLetter object, a function to convert a char to an AsciiLetter object, and an empty AsciiLetter object.
 module [
     AsciiLetter, 
     charToAsciiLetter,
