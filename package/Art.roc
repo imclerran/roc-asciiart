@@ -1,3 +1,11 @@
+## ```
+##     _         _                    
+##    / \   _ __| |_   _ __ ___   ___ 
+##   / _ \ | '__| __| | '__/ _ \ / __|
+##  / ___ \| |  | |_ _| | | (_) | (__ 
+## /_/   \_\_|   \__(_)_|  \___/ \___|
+## ```
+## Provides functions for converting strings to ASCII art.
 module [strToArt, strToArtLines, strToArtTrimmed, lettersToArt, lettersToArtLines, strToLetters]
 
 import Letters exposing [AsciiLetter, emptyLetter, charToAsciiLetter]
