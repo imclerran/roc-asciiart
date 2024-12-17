@@ -2,93 +2,16 @@ module [
     AsciiLetter, 
     charToAsciiLetter,
     emptyLetter,
-    space,
-    exclamationMark,
-    quotationMark,
-    numberSign,
-    dollarSign,
-    percentSign,
-    ampersand,
-    apostrophe,
-    roundOpenBracket,
-    roundCloseBracket,
-    asterisk,
-    plusSign,
-    comma,
-    hyphen,
-    fullStop,
-    forwardSlash,
-    colon,
-    semiColon,
-    lessThanSign,
-    equalsSign,
-    greaterThanSign,
-    questionMark,
-    atSign,
-    squareOpenBracket,
-    backSlash,
-    squareCloseBracket,
-    caret,
-    underscore,
-    graveAccent,
-    curlyOpenBracket,
-    verticalBar,
-    curlyCloseBracket,
-    tilde,
-    upperA,
-    upperB,
-    upperC,
-    upperD,
-    upperE,
-    upperF,
-    upperG,
-    upperH,
-    upperI,
-    upperJ,
-    upperK,
-    upperL,
-    upperM,
-    upperN,
-    upperO,
-    upperP,
-    upperQ,
-    upperR,
-    upperS,
-    upperT,
-    upperU,
-    upperV,
-    upperW,
-    upperX,
-    upperY,
-    upperZ,
-    lowerA,
-    lowerB,
-    lowerC,
-    lowerD,
-    lowerE,
-    lowerF,
-    lowerG,
-    lowerH,
-    lowerI,
-    lowerJ,
-    lowerK,
-    lowerL,
-    lowerM,
-    lowerN,
-    lowerO,
-    lowerP,
-    lowerQ,
-    lowerR,
-    lowerS,
-    lowerT,
-    lowerU,
-    lowerV,
-    lowerW,
-    lowerX,
-    lowerY,
-    lowerZ,
 ]
 
+## Convert a char byte to an AsciiLetter object.
+##
+## Possible chars are:
+## - All letters (upper and lower case)
+## - Numbers 0-9
+## - Space
+## - Symbols:
+##   - ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
 charToAsciiLetter : U8 -> AsciiLetter
 charToAsciiLetter = \char -> Dict.get letterDict char |> Result.withDefault emptyLetter
 
@@ -190,12 +113,20 @@ letterDict = Dict.empty {}
     |> Dict.insert 'y' lowerY
     |> Dict.insert 'z' lowerZ
 
+## ```
+## AsciiLetter : {
+##     rows : List (List U8),
+##     maxHeadOverlap: U8,
+##     maxTailOverlap: U8,
+## }
+## ```
 AsciiLetter : {
     rows : List (List U8),
     maxHeadOverlap: U8,
     maxTailOverlap: U8,
 }
 
+## An empty AsciiLetter object with empty rows and 0 head and tail overlap.
 emptyLetter : AsciiLetter
 emptyLetter = {
     rows: [
