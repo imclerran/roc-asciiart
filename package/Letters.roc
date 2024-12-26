@@ -12,6 +12,19 @@ module [
     emptyLetter,
 ]
 
+## ```
+## AsciiLetter : {
+##     rows : List (List U8),
+##     maxHeadOverlap: U8,
+##     maxTailOverlap: U8,
+## }
+## ```
+AsciiLetter : {
+    rows : List (List U8),
+    maxHeadOverlap: U8,
+    maxTailOverlap: U8,
+}
+
 ## Convert a char byte to an AsciiLetter object.
 ##
 ## Possible chars are:
@@ -23,7 +36,7 @@ module [
 charToAsciiLetter : U8 -> AsciiLetter
 charToAsciiLetter = \char -> Dict.get letterDict char |> Result.withDefault emptyLetter
 
-
+## Dictionary mapping chars to AsciiLetter objects.
 letterDict = Dict.empty {}
     |> Dict.insert ' ' space
     |> Dict.insert '!' exclamationMark
@@ -120,19 +133,6 @@ letterDict = Dict.empty {}
     |> Dict.insert 'x' lowerX
     |> Dict.insert 'y' lowerY
     |> Dict.insert 'z' lowerZ
-
-## ```
-## AsciiLetter : {
-##     rows : List (List U8),
-##     maxHeadOverlap: U8,
-##     maxTailOverlap: U8,
-## }
-## ```
-AsciiLetter : {
-    rows : List (List U8),
-    maxHeadOverlap: U8,
-    maxTailOverlap: U8,
-}
 
 ## An empty AsciiLetter object with empty rows and 0 head and tail overlap.
 emptyLetter : AsciiLetter
