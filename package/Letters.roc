@@ -34,7 +34,7 @@ AsciiLetter : {
 ## - Symbols:
 ##   - ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
 char_to_ascii_letter : U8 -> AsciiLetter
-char_to_ascii_letter = \char -> Dict.get(letter_dict, char) |> Result.with_default(empty_letter)
+char_to_ascii_letter = |char| Dict.get(letter_dict, char) |> Result.with_default(empty_letter)
 
 ## Dictionary mapping chars to AsciiLetter objects.
 letter_dict =

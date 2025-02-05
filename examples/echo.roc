@@ -8,13 +8,13 @@ import cli.Stdout
 import cli.Stdin
 import art.Art
 
-main! = \_ ->
+main! = |_|
     Stdout.line!("ASCII-echo" |> Art.str_to_art_trimmed)?
     loop!({})?
-    Ok {}
+    Ok({})
 
 loop! : {} => Result {} _
-loop! = \{} ->
+loop! = |{}|
     Stdout.write!("Enter some text: ")?
     input = Stdin.line!({})?
     Stdout.line!(input |> Art.str_to_art)?
