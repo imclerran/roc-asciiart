@@ -1,15 +1,15 @@
 ## ```
-##  _         _   _                                 
-## | |    ___| |_| |_ ___ _ __ ___   _ __ ___   ___ 
+##  _         _   _
+## | |    ___| |_| |_ ___ _ __ ___   _ __ ___   ___
 ## | |   / _ \ __| __/ _ \ '__/ __| | '__/ _ \ / __|
-## | |__|  __/ |_| ||  __/ |  \__ \_| | | (_) | (__ 
+## | |__|  __/ |_| ||  __/ |  \__ \_| | | (_) | (__
 ## |_____\___|\__|\__\___|_|  |___(_)_|  \___/ \___|
 ## ```
 ## Includes the AsciiLetter object, a function to convert a char to an AsciiLetter object, and an empty AsciiLetter object.
 module [
-    AsciiLetter, 
-    charToAsciiLetter,
-    emptyLetter,
+    AsciiLetter,
+    char_to_ascii_letter,
+    empty_letter,
 ]
 
 ## ```
@@ -21,8 +21,8 @@ module [
 ## ```
 AsciiLetter : {
     rows : List (List U8),
-    maxHeadOverlap: U8,
-    maxTailOverlap: U8,
+    max_head_overlap : U8,
+    max_tail_overlap : U8,
 }
 
 ## Convert a char byte to an AsciiLetter object.
@@ -33,110 +33,111 @@ AsciiLetter : {
 ## - Space
 ## - Symbols:
 ##   - ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
-charToAsciiLetter : U8 -> AsciiLetter
-charToAsciiLetter = \char -> Dict.get letterDict char |> Result.withDefault emptyLetter
+char_to_ascii_letter : U8 -> AsciiLetter
+char_to_ascii_letter = |char| Dict.get(letter_dict, char) |> Result.with_default(empty_letter)
 
 ## Dictionary mapping chars to AsciiLetter objects.
-letterDict = Dict.empty {}
-    |> Dict.insert ' ' space
-    |> Dict.insert '!' exclamationMark
-    |> Dict.insert '"' quotationMark
-    |> Dict.insert '#' numberSign
-    |> Dict.insert '$' dollarSign
-    |> Dict.insert '%' percentSign
-    |> Dict.insert '&' ampersand
-    |> Dict.insert '\'' apostrophe
-    |> Dict.insert '(' roundOpenBracket
-    |> Dict.insert ')' roundCloseBracket
-    |> Dict.insert '*' asterisk
-    |> Dict.insert '+' plusSign
-    |> Dict.insert ',' comma
-    |> Dict.insert '-' hyphen
-    |> Dict.insert '.' fullStop
-    |> Dict.insert '/' forwardSlash
-    |> Dict.insert ':' colon
-    |> Dict.insert ';' semiColon
-    |> Dict.insert '<' lessThanSign
-    |> Dict.insert '=' equalsSign
-    |> Dict.insert '>' greaterThanSign
-    |> Dict.insert '?' questionMark
-    |> Dict.insert '@' atSign
-    |> Dict.insert '[' squareOpenBracket
-    |> Dict.insert '\\' backSlash
-    |> Dict.insert ']' squareCloseBracket
-    |> Dict.insert '^' caret
-    |> Dict.insert '_' underscore
-    |> Dict.insert '`' graveAccent
-    |> Dict.insert '{' curlyOpenBracket
-    |> Dict.insert '|' verticalBar
-    |> Dict.insert '}' curlyCloseBracket
-    |> Dict.insert '~' tilde
-    |> Dict.insert '0' numberZero
-    |> Dict.insert '1' numberOne
-    |> Dict.insert '2' numberTwo
-    |> Dict.insert '3' numberThree
-    |> Dict.insert '4' numberFour
-    |> Dict.insert '5' numberFive
-    |> Dict.insert '6' numberSix
-    |> Dict.insert '7' numberSeven
-    |> Dict.insert '8' numberEight
-    |> Dict.insert '9' numberNine
-    |> Dict.insert 'A' upperA
-    |> Dict.insert 'B' upperB
-    |> Dict.insert 'C' upperC
-    |> Dict.insert 'D' upperD
-    |> Dict.insert 'E' upperE
-    |> Dict.insert 'F' upperF
-    |> Dict.insert 'G' upperG
-    |> Dict.insert 'H' upperH
-    |> Dict.insert 'I' upperI
-    |> Dict.insert 'J' upperJ
-    |> Dict.insert 'K' upperK
-    |> Dict.insert 'L' upperL
-    |> Dict.insert 'M' upperM
-    |> Dict.insert 'N' upperN
-    |> Dict.insert 'O' upperO
-    |> Dict.insert 'P' upperP
-    |> Dict.insert 'Q' upperQ
-    |> Dict.insert 'R' upperR
-    |> Dict.insert 'S' upperS
-    |> Dict.insert 'T' upperT
-    |> Dict.insert 'U' upperU
-    |> Dict.insert 'V' upperV
-    |> Dict.insert 'W' upperW
-    |> Dict.insert 'X' upperX
-    |> Dict.insert 'Y' upperY
-    |> Dict.insert 'Z' upperZ
-    |> Dict.insert 'a' lowerA
-    |> Dict.insert 'b' lowerB
-    |> Dict.insert 'c' lowerC
-    |> Dict.insert 'd' lowerD
-    |> Dict.insert 'e' lowerE
-    |> Dict.insert 'f' lowerF
-    |> Dict.insert 'g' lowerG
-    |> Dict.insert 'h' lowerH
-    |> Dict.insert 'i' lowerI
-    |> Dict.insert 'j' lowerJ
-    |> Dict.insert 'k' lowerK
-    |> Dict.insert 'l' lowerL
-    |> Dict.insert 'm' lowerM
-    |> Dict.insert 'n' lowerN
-    |> Dict.insert 'o' lowerO
-    |> Dict.insert 'p' lowerP
-    |> Dict.insert 'q' lowerQ
-    |> Dict.insert 'r' lowerR
-    |> Dict.insert 's' lowerS
-    |> Dict.insert 't' lowerT
-    |> Dict.insert 'u' lowerU
-    |> Dict.insert 'v' lowerV
-    |> Dict.insert 'w' lowerW
-    |> Dict.insert 'x' lowerX
-    |> Dict.insert 'y' lowerY
-    |> Dict.insert 'z' lowerZ
+letter_dict =
+    Dict.empty({})
+    |> Dict.insert(' ', space)
+    |> Dict.insert('!', exclamation_mark)
+    |> Dict.insert('"', quotation_mark)
+    |> Dict.insert('#', number_sign)
+    |> Dict.insert('$', dollar_sign)
+    |> Dict.insert('%', percent_sign)
+    |> Dict.insert('&', ampersand)
+    |> Dict.insert('\'', apostrophe)
+    |> Dict.insert('(', round_open_bracket)
+    |> Dict.insert(')', round_close_bracket)
+    |> Dict.insert('*', asterisk)
+    |> Dict.insert('+', plus_sign)
+    |> Dict.insert(',', comma)
+    |> Dict.insert('-', hyphen)
+    |> Dict.insert('.', full_stop)
+    |> Dict.insert('/', forward_slash)
+    |> Dict.insert(':', colon)
+    |> Dict.insert(';', semi_colon)
+    |> Dict.insert('<', less_than_sign)
+    |> Dict.insert('=', equals_sign)
+    |> Dict.insert('>', greater_than_sign)
+    |> Dict.insert('?', question_mark)
+    |> Dict.insert('@', at_sign)
+    |> Dict.insert('[', square_open_bracket)
+    |> Dict.insert('\\', back_slash)
+    |> Dict.insert(']', square_close_bracket)
+    |> Dict.insert('^', caret)
+    |> Dict.insert('_', underscore)
+    |> Dict.insert('`', grave_accent)
+    |> Dict.insert('{', curly_open_bracket)
+    |> Dict.insert('|', vertical_bar)
+    |> Dict.insert('}', curly_close_bracket)
+    |> Dict.insert('~', tilde)
+    |> Dict.insert('0', number_zero)
+    |> Dict.insert('1', number_one)
+    |> Dict.insert('2', number_two)
+    |> Dict.insert('3', number_three)
+    |> Dict.insert('4', number_four)
+    |> Dict.insert('5', number_five)
+    |> Dict.insert('6', number_six)
+    |> Dict.insert('7', number_seven)
+    |> Dict.insert('8', number_eight)
+    |> Dict.insert('9', number_nine)
+    |> Dict.insert('A', upper_a)
+    |> Dict.insert('B', upper_b)
+    |> Dict.insert('C', upper_c)
+    |> Dict.insert('D', upper_d)
+    |> Dict.insert('E', upper_e)
+    |> Dict.insert('F', upper_f)
+    |> Dict.insert('G', upper_g)
+    |> Dict.insert('H', upper_h)
+    |> Dict.insert('I', upper_i)
+    |> Dict.insert('J', upper_j)
+    |> Dict.insert('K', upper_k)
+    |> Dict.insert('L', upper_l)
+    |> Dict.insert('M', upper_m)
+    |> Dict.insert('N', upper_n)
+    |> Dict.insert('O', upper_o)
+    |> Dict.insert('P', upper_p)
+    |> Dict.insert('Q', upper_q)
+    |> Dict.insert('R', upper_r)
+    |> Dict.insert('S', upper_s)
+    |> Dict.insert('T', upper_t)
+    |> Dict.insert('U', upper_u)
+    |> Dict.insert('V', upper_v)
+    |> Dict.insert('W', upper_w)
+    |> Dict.insert('X', upper_x)
+    |> Dict.insert('Y', upper_y)
+    |> Dict.insert('Z', upper_z)
+    |> Dict.insert('a', lower_a)
+    |> Dict.insert('b', lower_b)
+    |> Dict.insert('c', lower_c)
+    |> Dict.insert('d', lower_d)
+    |> Dict.insert('e', lower_e)
+    |> Dict.insert('f', lower_f)
+    |> Dict.insert('g', lower_g)
+    |> Dict.insert('h', lower_h)
+    |> Dict.insert('i', lower_i)
+    |> Dict.insert('j', lower_j)
+    |> Dict.insert('k', lower_k)
+    |> Dict.insert('l', lower_l)
+    |> Dict.insert('m', lower_m)
+    |> Dict.insert('n', lower_n)
+    |> Dict.insert('o', lower_o)
+    |> Dict.insert('p', lower_p)
+    |> Dict.insert('q', lower_q)
+    |> Dict.insert('r', lower_r)
+    |> Dict.insert('s', lower_s)
+    |> Dict.insert('t', lower_t)
+    |> Dict.insert('u', lower_u)
+    |> Dict.insert('v', lower_v)
+    |> Dict.insert('w', lower_w)
+    |> Dict.insert('x', lower_x)
+    |> Dict.insert('y', lower_y)
+    |> Dict.insert('z', lower_z)
 
 ## An empty AsciiLetter object with empty rows and 0 head and tail overlap.
-emptyLetter : AsciiLetter
-emptyLetter = {
+empty_letter : AsciiLetter
+empty_letter = {
     rows: [
         [],
         [],
@@ -145,8 +146,8 @@ emptyLetter = {
         [],
         [],
     ],
-    maxHeadOverlap: 0,
-    maxTailOverlap: 0,
+    max_head_overlap: 0,
+    max_tail_overlap: 0,
 }
 
 space : AsciiLetter
@@ -159,40 +160,40 @@ space = {
         [32],
         [32],
     ],
-    maxHeadOverlap: 0,
-    maxTailOverlap: 0,
+    max_head_overlap: 0,
+    max_tail_overlap: 0,
 }
 
-exclamationMark : AsciiLetter
-exclamationMark = {
+exclamation_mark : AsciiLetter
+exclamation_mark = {
     rows: [
         [' ', '_', ' '],
         ['|', ' ', '|'],
         ['|', ' ', '|'],
         ['|', '_', '|'],
         ['(', '_', ')'],
-        [' ', ' ', ' '],        
+        [' ', ' ', ' '],
     ],
-    maxHeadOverlap: 3,
-    maxTailOverlap: 3,
+    max_head_overlap: 3,
+    max_tail_overlap: 3,
 }
 
-quotationMark : AsciiLetter
-quotationMark = {
+quotation_mark : AsciiLetter
+quotation_mark = {
     rows: [
         [' ', '_', ' ', '_', ' '],
         ['(', ' ', '|', ' ', ')'],
         [' ', 'V', ' ', 'V', ' '],
         [' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 3,
-    maxTailOverlap: 3,
+    max_head_overlap: 3,
+    max_tail_overlap: 3,
 }
 
-numberSign : AsciiLetter
-numberSign = {
+number_sign : AsciiLetter
+number_sign = {
     rows: [
         [' ', ' ', ' ', '_', ' ', ' ', '_', ' ', ' ', ' '],
         [' ', '_', '|', ' ', '|', '|', ' ', '|', '_', ' '],
@@ -201,12 +202,12 @@ numberSign = {
         [' ', ' ', '|', '_', '|', '|', '_', '|', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 10,
-    maxTailOverlap: 10,
+    max_head_overlap: 10,
+    max_tail_overlap: 10,
 }
 
-dollarSign : AsciiLetter
-dollarSign = {
+dollar_sign : AsciiLetter
+dollar_sign = {
     rows: [
         [' ', ' ', '_', ' ', ' '],
         [' ', '|', ' ', '|', ' '],
@@ -215,12 +216,12 @@ dollarSign = {
         ['(', ' ', ' ', ' ', '/'],
         [' ', '|', '_', '|', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-percentSign : AsciiLetter
-percentSign = {
+percent_sign : AsciiLetter
+percent_sign = {
     rows: [
         [' ', '_', ' ', ' ', '_', '_'],
         ['(', '_', ')', '/', ' ', '/'],
@@ -228,10 +229,9 @@ percentSign = {
         [' ', '/', ' ', '/', '_', ' '],
         ['/', '_', '/', '(', '_', ')'],
         [' ', ' ', ' ', ' ', ' ', ' '],
-        
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
 ampersand : AsciiLetter
@@ -242,10 +242,10 @@ ampersand = {
         [' ', '/', ' ', '_', ' ', '\\', '/', '\\'],
         ['|', ' ', '(', '_', '>', ' ', ' ', '<'],
         [' ', '\\', '_', '_', '_', '/', '\\', '/'],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 8,
-    maxTailOverlap: 8,
+    max_head_overlap: 8,
+    max_tail_overlap: 8,
 }
 
 apostrophe : AsciiLetter
@@ -256,14 +256,14 @@ apostrophe = {
         ['|', '/', ' '],
         [' ', ' ', ' '],
         [' ', ' ', ' '],
-        [' ', ' ', ' '],       
+        [' ', ' ', ' '],
     ],
-    maxHeadOverlap: 2,
-    maxTailOverlap: 2,
+    max_head_overlap: 2,
+    max_tail_overlap: 2,
 }
 
-roundOpenBracket : AsciiLetter
-roundOpenBracket = {
+round_open_bracket : AsciiLetter
+round_open_bracket = {
     rows: [
         [' ', ' ', '_', '_'],
         [' ', '/', ' ', '/'],
@@ -272,12 +272,12 @@ roundOpenBracket = {
         ['|', ' ', '|', ' '],
         [' ', '\\', '_', '\\'],
     ],
-    maxHeadOverlap: 4,
-    maxTailOverlap: 4,
+    max_head_overlap: 4,
+    max_tail_overlap: 4,
 }
 
-roundCloseBracket : AsciiLetter
-roundCloseBracket = {
+round_close_bracket : AsciiLetter
+round_close_bracket = {
     rows: [
         ['_', '_', ' ', ' '],
         ['\\', ' ', '\\', ' '],
@@ -286,8 +286,8 @@ roundCloseBracket = {
         [' ', '|', ' ', '|'],
         ['/', '_', '/', ' '],
     ],
-    maxHeadOverlap: 4,
-    maxTailOverlap: 4,
+    max_head_overlap: 4,
+    max_tail_overlap: 4,
 }
 
 asterisk : AsciiLetter
@@ -298,24 +298,24 @@ asterisk = {
         ['/', '_', ' ', ' ', '_', '\\'],
         [' ', ' ', '\\', '/', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-plusSign : AsciiLetter
-plusSign = {
+plus_sign : AsciiLetter
+plus_sign = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', '_', ' ', ' ', ' '],
         [' ', '_', '|', ' ', '|', '_', ' '],
         ['|', '_', ' ', ' ', ' ', '_', '|'],
         [' ', ' ', '|', '_', '|', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '],              
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
 comma : AsciiLetter
@@ -328,8 +328,8 @@ comma = {
         ['(', ' ', ')'],
         ['|', '/', ' '],
     ],
-    maxHeadOverlap: 2,
-    maxTailOverlap: 2,
+    max_head_overlap: 2,
+    max_tail_overlap: 2,
 }
 
 hyphen : AsciiLetter
@@ -342,12 +342,12 @@ hyphen = {
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-fullStop : AsciiLetter
-fullStop = {
+full_stop : AsciiLetter
+full_stop = {
     rows: [
         [' ', ' ', ' '],
         [' ', ' ', ' '],
@@ -356,12 +356,12 @@ fullStop = {
         ['(', '_', ')'],
         [' ', ' ', ' '],
     ],
-    maxHeadOverlap: 2,
-    maxTailOverlap: 2,
+    max_head_overlap: 2,
+    max_tail_overlap: 2,
 }
 
-forwardSlash : AsciiLetter
-forwardSlash = {
+forward_slash : AsciiLetter
+forward_slash = {
     rows: [
         [' ', ' ', ' ', ' ', '_', '_'],
         [' ', ' ', ' ', '/', ' ', '/'],
@@ -370,8 +370,8 @@ forwardSlash = {
         ['/', '_', '/', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
 colon : AsciiLetter
@@ -384,12 +384,12 @@ colon = {
         ['(', '_', ')'],
         [' ', ' ', ' '],
     ],
-    maxHeadOverlap: 1,
-    maxTailOverlap: 1,
+    max_head_overlap: 1,
+    max_tail_overlap: 1,
 }
 
-semiColon : AsciiLetter
-semiColon = {
+semi_colon : AsciiLetter
+semi_colon = {
     rows: [
         [' ', ' ', ' '],
         [' ', '_', ' '],
@@ -398,82 +398,82 @@ semiColon = {
         ['(', ' ', ')'],
         ['|', '/', ' '],
     ],
-    maxHeadOverlap: 1,
-    maxTailOverlap: 1,
+    max_head_overlap: 1,
+    max_tail_overlap: 1,
 }
 
-lessThanSign : AsciiLetter
-lessThanSign = {
+less_than_sign : AsciiLetter
+less_than_sign = {
     rows: [
         [' ', ' ', '_', '_'],
         [' ', '/', ' ', '/'],
         ['/', ' ', '/', ' '],
         ['\\', ' ', '\\', ' '],
         [' ', '\\', '_', '\\'],
-        [' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 4,
-    maxTailOverlap: 4,
+    max_head_overlap: 4,
+    max_tail_overlap: 4,
 }
 
-equalsSign : AsciiLetter
-equalsSign = {
+equals_sign : AsciiLetter
+equals_sign = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', '_', '_', '_', '_', '_', ' '],
         ['|', '_', '_', '_', '_', '_', '|'],
         ['|', '_', '_', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '],      
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-greaterThanSign : AsciiLetter
-greaterThanSign = {
+greater_than_sign : AsciiLetter
+greater_than_sign = {
     rows: [
         ['_', '_', ' ', ' '],
         ['\\', ' ', '\\', ' '],
         [' ', '\\', ' ', '\\'],
         [' ', '/', ' ', '/'],
         ['/', '_', '/', ' '],
-        [' ', ' ', ' ', ' '],       
+        [' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 4,
-    maxTailOverlap: 4,
+    max_head_overlap: 4,
+    max_tail_overlap: 4,
 }
 
-questionMark : AsciiLetter
-questionMark = {
+question_mark : AsciiLetter
+question_mark = {
     rows: [
         [' ', '_', '_', '_', ' '],
         ['|', '_', '_', ' ', '\\'],
         [' ', ' ', '/', ' ', '/'],
         [' ', '|', '_', '|', ' '],
         [' ', '(', '_', ')', ' '],
-        [' ', ' ', ' ', ' ', ' '],       
+        [' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-atSign : AsciiLetter
-atSign = {
+at_sign : AsciiLetter
+at_sign = {
     rows: [
         [' ', ' ', ' ', '_', '_', '_', '_', ' ', ' '],
         [' ', ' ', '/', ' ', '_', '_', ' ', '\\', ' '],
         [' ', '/', ' ', '/', ' ', '_', '`', ' ', '|'],
         ['|', ' ', '|', ' ', '(', '_', '|', ' ', '|'],
         [' ', '\\', ' ', '\\', '_', '_', ',', '_', '|'],
-        [' ', ' ', '\\', '_', '_', '_', '_', '/', ' '],        
+        [' ', ' ', '\\', '_', '_', '_', '_', '/', ' '],
     ],
-    maxHeadOverlap: 9,
-    maxTailOverlap: 9,
+    max_head_overlap: 9,
+    max_tail_overlap: 9,
 }
 
-squareOpenBracket : AsciiLetter
-squareOpenBracket = {
+square_open_bracket : AsciiLetter
+square_open_bracket = {
     rows: [
         [' ', '_', '_', ' '],
         ['|', ' ', '_', '|'],
@@ -482,12 +482,12 @@ squareOpenBracket = {
         ['|', ' ', '|', ' '],
         ['|', '_', '_', '|'],
     ],
-    maxHeadOverlap: 4,
-    maxTailOverlap: 4,
+    max_head_overlap: 4,
+    max_tail_overlap: 4,
 }
 
-backSlash : AsciiLetter
-backSlash = {
+back_slash : AsciiLetter
+back_slash = {
     rows: [
         ['_', '_', ' ', ' ', ' ', ' '],
         ['\\', ' ', '\\', ' ', ' ', ' '],
@@ -496,12 +496,12 @@ backSlash = {
         [' ', ' ', ' ', '\\', '_', '\\'],
         [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-squareCloseBracket : AsciiLetter
-squareCloseBracket = {
+square_close_bracket : AsciiLetter
+square_close_bracket = {
     rows: [
         [' ', '_', '_', ' '],
         ['|', '_', ' ', '|'],
@@ -510,8 +510,8 @@ squareCloseBracket = {
         [' ', '|', ' ', '|'],
         ['|', '_', '_', '|'],
     ],
-    maxHeadOverlap: 4,
-    maxTailOverlap: 4,
+    max_head_overlap: 4,
+    max_tail_overlap: 4,
 }
 
 caret : AsciiLetter
@@ -524,8 +524,8 @@ caret = {
         [' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 4,
-    maxTailOverlap: 4,
+    max_head_overlap: 4,
+    max_tail_overlap: 4,
 }
 
 underscore : AsciiLetter
@@ -538,12 +538,12 @@ underscore = {
         [' ', '_', '_', '_', '_', '_', ' '],
         ['|', '_', '_', '_', '_', '_', '|'],
     ],
-    maxHeadOverlap: 2,
-    maxTailOverlap: 2,
+    max_head_overlap: 2,
+    max_tail_overlap: 2,
 }
 
-graveAccent : AsciiLetter
-graveAccent = {
+grave_accent : AsciiLetter
+grave_accent = {
     rows: [
         [' ', '_', ' '],
         ['(', ' ', ')'],
@@ -552,12 +552,12 @@ graveAccent = {
         [' ', ' ', ' '],
         [' ', ' ', ' '],
     ],
-    maxHeadOverlap: 1,
-    maxTailOverlap: 1,
+    max_head_overlap: 1,
+    max_tail_overlap: 1,
 }
 
-curlyOpenBracket : AsciiLetter
-curlyOpenBracket = {
+curly_open_bracket : AsciiLetter
+curly_open_bracket = {
     rows: [
         [' ', ' ', ' ', '_', '_'],
         [' ', ' ', '/', ' ', '/'],
@@ -566,12 +566,12 @@ curlyOpenBracket = {
         [' ', '|', ' ', '|', ' '],
         [' ', ' ', '\\', '_', '\\'],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-verticalBar : AsciiLetter
-verticalBar = {
+vertical_bar : AsciiLetter
+vertical_bar = {
     rows: [
         [' ', '_', ' '],
         ['|', ' ', '|'],
@@ -580,12 +580,12 @@ verticalBar = {
         ['|', ' ', '|'],
         ['|', '_', '|'],
     ],
-    maxHeadOverlap: 3,
-    maxTailOverlap: 3,
+    max_head_overlap: 3,
+    max_tail_overlap: 3,
 }
 
-curlyCloseBracket : AsciiLetter
-curlyCloseBracket = {
+curly_close_bracket : AsciiLetter
+curly_close_bracket = {
     rows: [
         ['_', '_', ' ', ' ', ' '],
         ['\\', ' ', '\\', ' ', ' '],
@@ -594,8 +594,8 @@ curlyCloseBracket = {
         [' ', '|', ' ', '|', ' '],
         ['/', '_', '/', ' ', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
 tilde : AsciiLetter
@@ -608,12 +608,12 @@ tilde = {
         [' ', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-numberZero : AsciiLetter
-numberZero = {
+number_zero : AsciiLetter
+number_zero = {
     rows: [
         [' ', ' ', '_', '_', '_', ' ', ' '],
         [' ', '/', ' ', '_', ' ', '\\', ' '],
@@ -622,12 +622,12 @@ numberZero = {
         [' ', '\\', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-numberOne : AsciiLetter
-numberOne = {
+number_one : AsciiLetter
+number_one = {
     rows: [
         [' ', '_', ' '],
         ['/', ' ', '|'],
@@ -636,12 +636,12 @@ numberOne = {
         ['|', '_', '|'],
         [' ', ' ', ' '],
     ],
-    maxHeadOverlap: 3,
-    maxTailOverlap: 3,
+    max_head_overlap: 3,
+    max_tail_overlap: 3,
 }
 
-numberTwo : AsciiLetter
-numberTwo = {
+number_two : AsciiLetter
+number_two = {
     rows: [
         [' ', '_', '_', '_', '_', ' ', ' '],
         ['|', '_', '_', '_', ' ', '\\', ' '],
@@ -650,12 +650,12 @@ numberTwo = {
         ['|', '_', '_', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-numberThree : AsciiLetter
-numberThree = {
+number_three : AsciiLetter
+number_three = {
     rows: [
         [' ', '_', '_', '_', '_', '_', ' '],
         ['|', '_', '_', '_', ' ', '/', ' '],
@@ -664,12 +664,12 @@ numberThree = {
         ['|', '_', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-numberFour : AsciiLetter
-numberFour = {
+number_four : AsciiLetter
+number_four = {
     rows: [
         [' ', '_', ' ', ' ', '_', ' ', ' ', ' '],
         ['|', ' ', '|', '|', ' ', '|', ' ', ' '],
@@ -677,14 +677,13 @@ numberFour = {
         ['|', '_', '_', ' ', ' ', ' ', '_', '|'],
         [' ', ' ', ' ', '|', '_', '|', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-        
     ],
-    maxHeadOverlap: 8,
-    maxTailOverlap: 8,
+    max_head_overlap: 8,
+    max_tail_overlap: 8,
 }
 
-numberFive : AsciiLetter
-numberFive = {
+number_five : AsciiLetter
+number_five = {
     rows: [
         [' ', '_', '_', '_', '_', ' ', ' '],
         ['|', ' ', '_', '_', '_', '|', ' '],
@@ -693,12 +692,12 @@ numberFive = {
         ['|', '_', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-numberSix : AsciiLetter
-numberSix = {
+number_six : AsciiLetter
+number_six = {
     rows: [
         [' ', ' ', '_', '_', ' ', ' ', ' '],
         [' ', '/', ' ', '/', '_', ' ', ' '],
@@ -707,12 +706,12 @@ numberSix = {
         [' ', '\\', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-numberSeven : AsciiLetter
-numberSeven = {
+number_seven : AsciiLetter
+number_seven = {
     rows: [
         [' ', '_', '_', '_', '_', '_', ' '],
         ['|', '_', '_', '_', ' ', ' ', '|'],
@@ -721,12 +720,12 @@ numberSeven = {
         [' ', '/', '_', '/', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-numberEight : AsciiLetter
-numberEight = {
+number_eight : AsciiLetter
+number_eight = {
     rows: [
         [' ', ' ', '_', '_', '_', ' ', ' '],
         [' ', '(', ' ', '_', ' ', ')', ' '],
@@ -735,12 +734,12 @@ numberEight = {
         [' ', '\\', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-numberNine : AsciiLetter
-numberNine = {
+number_nine : AsciiLetter
+number_nine = {
     rows: [
         [' ', ' ', '_', '_', '_', ' ', ' '],
         [' ', '/', ' ', '_', ' ', '\\', ' '],
@@ -749,12 +748,12 @@ numberNine = {
         [' ', ' ', ' ', '/', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperA : AsciiLetter
-upperA = {
+upper_a : AsciiLetter
+upper_a = {
     rows: [
         [' ', ' ', ' ', ' ', '_', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', '/', ' ', '\\', ' ', ' ', ' '],
@@ -763,12 +762,12 @@ upperA = {
         ['/', '_', '/', ' ', ' ', ' ', '\\', '_', '\\'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 9,
-    maxTailOverlap: 9,
+    max_head_overlap: 9,
+    max_tail_overlap: 9,
 }
 
-upperB : AsciiLetter
-upperB = {
+upper_b : AsciiLetter
+upper_b = {
     rows: [
         [' ', '_', '_', '_', '_', ' ', ' '],
         ['|', ' ', '_', '_', ' ', ')', ' '],
@@ -777,12 +776,12 @@ upperB = {
         ['|', '_', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperC : AsciiLetter
-upperC = {
+upper_c : AsciiLetter
+upper_c = {
     rows: [
         [' ', ' ', '_', '_', '_', '_', ' '],
         [' ', '/', ' ', '_', '_', '_', '|'],
@@ -791,12 +790,12 @@ upperC = {
         [' ', '\\', '_', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperD : AsciiLetter
-upperD = {
+upper_d : AsciiLetter
+upper_d = {
     rows: [
         [' ', '_', '_', '_', '_', ' ', ' '],
         ['|', ' ', ' ', '_', ' ', '\\', ' '],
@@ -805,12 +804,12 @@ upperD = {
         ['|', '_', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperE : AsciiLetter
-upperE = {
+upper_e : AsciiLetter
+upper_e = {
     rows: [
         [' ', '_', '_', '_', '_', '_', ' '],
         ['|', ' ', '_', '_', '_', '_', '|'],
@@ -819,12 +818,12 @@ upperE = {
         ['|', '_', '_', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperF : AsciiLetter
-upperF = {
+upper_f : AsciiLetter
+upper_f = {
     rows: [
         [' ', '_', '_', '_', '_', '_', ' '],
         ['|', ' ', ' ', '_', '_', '_', '|'],
@@ -833,12 +832,12 @@ upperF = {
         ['|', '_', '|', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperG : AsciiLetter
-upperG = {
+upper_g : AsciiLetter
+upper_g = {
     rows: [
         [' ', ' ', '_', '_', '_', '_', ' '],
         [' ', '/', ' ', '_', '_', '_', '|'],
@@ -847,12 +846,12 @@ upperG = {
         [' ', '\\', '_', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperH : AsciiLetter
-upperH = {
+upper_h : AsciiLetter
+upper_h = {
     rows: [
         [' ', '_', ' ', ' ', ' ', '_', ' '],
         ['|', ' ', '|', ' ', '|', ' ', '|'],
@@ -861,12 +860,12 @@ upperH = {
         ['|', '_', '|', ' ', '|', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperI : AsciiLetter
-upperI = {
+upper_i : AsciiLetter
+upper_i = {
     rows: [
         [' ', '_', '_', '_', ' '],
         ['|', '_', ' ', '_', '|'],
@@ -875,12 +874,12 @@ upperI = {
         ['|', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-upperJ : AsciiLetter
-upperJ = {
+upper_j : AsciiLetter
+upper_j = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', '_', ' '],
         [' ', ' ', ' ', ' ', '|', ' ', '|'],
@@ -889,12 +888,12 @@ upperJ = {
         [' ', '\\', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-upperK : AsciiLetter
-upperK = {
+upper_k : AsciiLetter
+upper_k = {
     rows: [
         [' ', '_', ' ', ' ', '_', '_'],
         ['|', ' ', '|', '/', ' ', '/'],
@@ -903,12 +902,12 @@ upperK = {
         ['|', '_', '|', '\\', '_', '\\'],
         [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-upperL : AsciiLetter
-upperL = {
+upper_l : AsciiLetter
+upper_l = {
     rows: [
         [' ', '_', ' ', ' ', ' ', ' ', ' '],
         ['|', ' ', '|', ' ', ' ', ' ', ' '],
@@ -917,12 +916,12 @@ upperL = {
         ['|', '_', '_', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperM : AsciiLetter
-upperM = {
+upper_m : AsciiLetter
+upper_m = {
     rows: [
         [' ', '_', '_', ' ', ' ', '_', '_', ' '],
         ['|', ' ', ' ', '\\', '/', ' ', ' ', '|'],
@@ -931,12 +930,12 @@ upperM = {
         ['|', '_', '|', ' ', ' ', '|', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 8,
-    maxTailOverlap: 8,
+    max_head_overlap: 8,
+    max_tail_overlap: 8,
 }
 
-upperN : AsciiLetter
-upperN = {
+upper_n : AsciiLetter
+upper_n = {
     rows: [
         [' ', '_', ' ', ' ', ' ', '_', ' '],
         ['|', ' ', '\\', ' ', '|', ' ', '|'],
@@ -945,12 +944,12 @@ upperN = {
         ['|', '_', '|', ' ', '\\', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperO : AsciiLetter
-upperO = {
+upper_o : AsciiLetter
+upper_o = {
     rows: [
         [' ', ' ', '_', '_', '_', ' ', ' '],
         [' ', '/', ' ', '_', ' ', '\\', ' '],
@@ -959,12 +958,12 @@ upperO = {
         [' ', '\\', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperP : AsciiLetter
-upperP = {
+upper_p : AsciiLetter
+upper_p = {
     rows: [
         [' ', '_', '_', '_', '_', ' ', ' '],
         ['|', ' ', ' ', '_', ' ', '\\', ' '],
@@ -973,12 +972,12 @@ upperP = {
         ['|', '_', '|', ' ', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperQ : AsciiLetter
-upperQ = {
+upper_q : AsciiLetter
+upper_q = {
     rows: [
         [' ', ' ', '_', '_', '_', ' ', ' '],
         [' ', '/', ' ', '_', ' ', '\\', ' '],
@@ -987,12 +986,12 @@ upperQ = {
         [' ', '\\', '_', '_', '\\', '_', '\\'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperR : AsciiLetter
-upperR = {
+upper_r : AsciiLetter
+upper_r = {
     rows: [
         [' ', '_', '_', '_', '_', ' ', ' '],
         ['|', ' ', ' ', '_', ' ', '\\', ' '],
@@ -1001,12 +1000,12 @@ upperR = {
         ['|', '_', '|', ' ', '\\', '_', '\\'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperS : AsciiLetter
-upperS = {
+upper_s : AsciiLetter
+upper_s = {
     rows: [
         [' ', '_', '_', '_', '_', ' ', ' '],
         ['/', ' ', '_', '_', '_', '|', ' '],
@@ -1015,12 +1014,12 @@ upperS = {
         ['|', '_', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperT : AsciiLetter
-upperT = {
+upper_t : AsciiLetter
+upper_t = {
     rows: [
         [' ', '_', '_', '_', '_', '_', ' '],
         ['|', '_', ' ', ' ', ' ', '_', '|'],
@@ -1029,12 +1028,12 @@ upperT = {
         [' ', ' ', '|', '_', '|', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperU : AsciiLetter
-upperU = {
+upper_u : AsciiLetter
+upper_u = {
     rows: [
         [' ', '_', ' ', ' ', ' ', '_', ' '],
         ['|', ' ', '|', ' ', '|', ' ', '|'],
@@ -1043,12 +1042,12 @@ upperU = {
         [' ', '\\', '_', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperV : AsciiLetter
-upperV = {
+upper_v : AsciiLetter
+upper_v = {
     rows: [
         ['_', '_', ' ', ' ', ' ', ' ', ' ', '_', '_'],
         ['\\', ' ', '\\', ' ', ' ', ' ', '/', ' ', '/'],
@@ -1057,12 +1056,12 @@ upperV = {
         [' ', ' ', ' ', '\\', '_', '/', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 9,
-    maxTailOverlap: 9,
+    max_head_overlap: 9,
+    max_tail_overlap: 9,
 }
 
-upperW : AsciiLetter
-upperW = {
+upper_w : AsciiLetter
+upper_w = {
     rows: [
         ['_', '_', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', '_'],
         ['\\', ' ', '\\', ' ', ' ', ' ', ' ', ' ', ' ', '/', ' ', '/'],
@@ -1071,12 +1070,12 @@ upperW = {
         [' ', ' ', ' ', '\\', '_', '/', '\\', '_', '/', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 12,
-    maxTailOverlap: 12,
+    max_head_overlap: 12,
+    max_tail_overlap: 12,
 }
 
-upperX : AsciiLetter
-upperX = {
+upper_x : AsciiLetter
+upper_x = {
     rows: [
         ['_', '_', ' ', ' ', '_', '_'],
         ['\\', ' ', '\\', '/', ' ', '/'],
@@ -1085,12 +1084,12 @@ upperX = {
         ['/', '_', '/', '\\', '_', '\\'],
         [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-upperY : AsciiLetter
-upperY = {
+upper_y : AsciiLetter
+upper_y = {
     rows: [
         ['_', '_', ' ', ' ', ' ', '_', '_'],
         ['\\', ' ', '\\', ' ', '/', ' ', '/'],
@@ -1099,12 +1098,12 @@ upperY = {
         [' ', ' ', '|', '_', '|', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-upperZ : AsciiLetter
-upperZ = {
+upper_z : AsciiLetter
+upper_z = {
     rows: [
         [' ', '_', '_', '_', '_', '_'],
         ['|', '_', '_', ' ', ' ', '/'],
@@ -1113,12 +1112,12 @@ upperZ = {
         ['/', '_', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-lowerA : AsciiLetter
-lowerA = {
+lower_a : AsciiLetter
+lower_a = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', '_', '_', ' ', '_', ' '],
@@ -1127,12 +1126,12 @@ lowerA = {
         [' ', '\\', '_', '_', ',', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerB : AsciiLetter
-lowerB = {
+lower_b : AsciiLetter
+lower_b = {
     rows: [
         [' ', '_', ' ', ' ', ' ', ' ', ' '],
         ['|', ' ', '|', '_', '_', ' ', ' '],
@@ -1141,12 +1140,12 @@ lowerB = {
         ['|', '_', '.', '_', '_', '/', ' '],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerC : AsciiLetter
-lowerC = {
+lower_c : AsciiLetter
+lower_c = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', '_', '_', '_', ' '],
@@ -1155,12 +1154,12 @@ lowerC = {
         [' ', '\\', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-lowerD : AsciiLetter
-lowerD = {
+lower_d : AsciiLetter
+lower_d = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', '_', ' '],
         [' ', ' ', '_', '_', '|', ' ', '|'],
@@ -1169,12 +1168,12 @@ lowerD = {
         [' ', '\\', '_', '_', ',', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerE : AsciiLetter
-lowerE = {
+lower_e : AsciiLetter
+lower_e = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', '_', '_', '_', ' '],
@@ -1183,12 +1182,12 @@ lowerE = {
         [' ', '\\', '_', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-lowerF : AsciiLetter
-lowerF = {
+lower_f : AsciiLetter
+lower_f = {
     rows: [
         [' ', ' ', '_', '_', ' '],
         [' ', '/', ' ', '_', '|'],
@@ -1197,12 +1196,12 @@ lowerF = {
         ['|', '_', '|', ' ', ' '],
         [' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-lowerG : AsciiLetter
-lowerG = {
+lower_g : AsciiLetter
+lower_g = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', '_', '_', ' ', '_', ' '],
@@ -1211,12 +1210,12 @@ lowerG = {
         [' ', '\\', '_', '_', ',', ' ', '|'],
         [' ', '|', '_', '_', '_', '/', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerH : AsciiLetter
-lowerH = {
+lower_h : AsciiLetter
+lower_h = {
     rows: [
         [' ', '_', ' ', ' ', ' ', ' ', ' '],
         ['|', ' ', '|', '_', '_', ' ', ' '],
@@ -1225,12 +1224,12 @@ lowerH = {
         ['|', '_', '|', ' ', '|', '_', '|'],
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerI : AsciiLetter
-lowerI = {
+lower_i : AsciiLetter
+lower_i = {
     rows: [
         [' ', '_', ' '],
         ['(', '_', ')'],
@@ -1239,12 +1238,12 @@ lowerI = {
         ['|', '_', '|'],
         [' ', ' ', ' '],
     ],
-    maxHeadOverlap: 3,
-    maxTailOverlap: 3,
+    max_head_overlap: 3,
+    max_tail_overlap: 3,
 }
 
-lowerJ : AsciiLetter
-lowerJ = {
+lower_j : AsciiLetter
+lower_j = {
     rows: [
         [' ', ' ', ' ', '_', ' '],
         [' ', ' ', '(', '_', ')'],
@@ -1253,110 +1252,110 @@ lowerJ = {
         [' ', '_', '/', ' ', '|'],
         ['|', '_', '_', '/', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-lowerK : AsciiLetter
-lowerK = {
+lower_k : AsciiLetter
+lower_k = {
     rows: [
         [' ', '_', ' ', ' ', ' ', ' '],
         ['|', ' ', '|', ' ', '_', '_'],
         ['|', ' ', '|', '/', ' ', '/'],
         ['|', ' ', ' ', ' ', '<', ' '],
         ['|', '_', '|', '\\', '_', '\\'],
-        [' ', ' ', ' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-lowerL : AsciiLetter
-lowerL = {
+lower_l : AsciiLetter
+lower_l = {
     rows: [
         [' ', '_', ' '],
         ['|', ' ', '|'],
         ['|', ' ', '|'],
         ['|', ' ', '|'],
         ['|', '_', '|'],
-        [' ', ' ', ' '],        
+        [' ', ' ', ' '],
     ],
-    maxHeadOverlap: 3,
-    maxTailOverlap: 3,
+    max_head_overlap: 3,
+    max_tail_overlap: 3,
 }
 
-lowerM : AsciiLetter
-lowerM = {
+lower_m : AsciiLetter
+lower_m = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', '_', ' ', '_', '_', ' ', '_', '_', '_', ' ', ' '],
         ['|', ' ', '\'', '_', ' ', '`', ' ', '_', ' ', '\\', ' '],
         ['|', ' ', '|', ' ', '|', ' ', '|', ' ', '|', ' ', '|'],
         ['|', '_', '|', ' ', '|', '_', '|', ' ', '|', '_', '|'],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],          
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 11,
-    maxTailOverlap: 11,
+    max_head_overlap: 11,
+    max_tail_overlap: 11,
 }
 
-lowerN : AsciiLetter
-lowerN = {
+lower_n : AsciiLetter
+lower_n = {
     rows: [
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '],  
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', '_', ' ', '_', '_', ' ', ' '],
         ['|', ' ', '\'', '_', ' ', '\\', ' '],
         ['|', ' ', '|', ' ', '|', ' ', '|'],
         ['|', '_', '|', ' ', '|', '_', '|'],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerO : AsciiLetter
-lowerO = {
+lower_o : AsciiLetter
+lower_o = {
     rows: [
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', '_', '_', '_', ' ', ' '],
         [' ', '/', ' ', '_', ' ', '\\', ' '],
         ['|', ' ', '(', '_', ')', ' ', '|'],
         [' ', '\\', '_', '_', '_', '/', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerP : AsciiLetter
-lowerP = {
+lower_p : AsciiLetter
+lower_p = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', '_', ' ', '_', '_', ' ', ' '],
         ['|', ' ', '\'', '_', ' ', '\\', ' '],
         ['|', ' ', '|', '_', ')', ' ', '|'],
         ['|', ' ', '.', '_', '_', '/', ' '],
-        ['|', '_', '|', ' ', ' ', ' ', ' '],  
+        ['|', '_', '|', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerQ : AsciiLetter
-lowerQ = {
+lower_q : AsciiLetter
+lower_q = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', ' ', '_', '_', ' ', '_', ' '],
         [' ', '/', ' ', '_', '`', ' ', '|'],
         ['|', ' ', '(', '_', '|', ' ', '|'],
         [' ', '\\', '_', '_', ',', ' ', '|'],
-        [' ', ' ', ' ', ' ', '|', '_', '|'],        
+        [' ', ' ', ' ', ' ', '|', '_', '|'],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerR : AsciiLetter
-lowerR = {
+lower_r : AsciiLetter
+lower_r = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' '],
         [' ', '_', ' ', '_', '_', ' '],
@@ -1365,12 +1364,12 @@ lowerR = {
         ['|', '_', '|', ' ', ' ', ' '],
         [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-lowerS : AsciiLetter
-lowerS = {
+lower_s : AsciiLetter
+lower_s = {
     rows: [
         [' ', ' ', ' ', ' ', ' '],
         [' ', '_', '_', '_', ' '],
@@ -1379,12 +1378,12 @@ lowerS = {
         ['|', '_', '_', '_', '/'],
         [' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-lowerT : AsciiLetter
-lowerT = {
+lower_t : AsciiLetter
+lower_t = {
     rows: [
         [' ', '_', ' ', ' ', ' '],
         ['|', ' ', '|', '_', ' '],
@@ -1393,90 +1392,90 @@ lowerT = {
         [' ', '\\', '_', '_', '|'],
         [' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
 
-lowerU : AsciiLetter
-lowerU = {
+lower_u : AsciiLetter
+lower_u = {
     rows: [
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '],  
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', '_', ' ', ' ', ' ', '_', ' '],
         ['|', ' ', '|', ' ', '|', ' ', '|'],
         ['|', ' ', '|', '_', '|', ' ', '|'],
         [' ', '\\', '_', '_', ',', '_', '|'],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerV : AsciiLetter
-lowerV = {
+lower_v : AsciiLetter
+lower_v = {
     rows: [
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         ['_', '_', ' ', ' ', ' ', '_', '_'],
         ['\\', ' ', '\\', ' ', '/', ' ', '/'],
         [' ', '\\', ' ', 'V', ' ', '/', ' '],
         [' ', ' ', '\\', '_', '/', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '],   
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerW : AsciiLetter
-lowerW = {
+lower_w : AsciiLetter
+lower_w = {
     rows: [
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
         ['_', '_', ' ', ' ', ' ', ' ', ' ', ' ', '_', '_'],
         ['\\', ' ', '\\', ' ', '/', '\\', ' ', '/', ' ', '/'],
         [' ', '\\', ' ', 'V', ' ', ' ', 'V', ' ', '/', ' '],
         [' ', ' ', '\\', '_', '/', '\\', '_', '/', ' ', ' '],
-        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+        [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 10,
-    maxTailOverlap: 10,
+    max_head_overlap: 10,
+    max_tail_overlap: 10,
 }
 
-lowerX : AsciiLetter
-lowerX = {
+lower_x : AsciiLetter
+lower_x = {
     rows: [
         [' ', ' ', ' ', ' ', ' ', ' '],
         ['_', '_', ' ', ' ', '_', '_'],
         ['\\', ' ', '\\', '/', ' ', '/'],
         [' ', '>', ' ', ' ', '<', ' '],
         ['/', '_', '/', '\\', '_', '\\'],
-        [' ', ' ', ' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 6,
-    maxTailOverlap: 6,
+    max_head_overlap: 6,
+    max_tail_overlap: 6,
 }
 
-lowerY : AsciiLetter
-lowerY = {
+lower_y : AsciiLetter
+lower_y = {
     rows: [
-        [' ', ' ', ' ', ' ', ' ', ' ', ' '],  
+        [' ', ' ', ' ', ' ', ' ', ' ', ' '],
         [' ', '_', ' ', ' ', ' ', '_', ' '],
         ['|', ' ', '|', ' ', '|', ' ', '|'],
         ['|', ' ', '|', '_', '|', ' ', '|'],
         [' ', '\\', '_', '_', ',', ' ', '|'],
-        [' ', '|', '_', '_', '_', '/', ' '],       
+        [' ', '|', '_', '_', '_', '/', ' '],
     ],
-    maxHeadOverlap: 7,
-    maxTailOverlap: 7,
+    max_head_overlap: 7,
+    max_tail_overlap: 7,
 }
 
-lowerZ : AsciiLetter
-lowerZ = {
+lower_z : AsciiLetter
+lower_z = {
     rows: [
         [' ', ' ', ' ', ' ', ' '],
         [' ', '_', '_', '_', '_'],
         ['|', '_', ' ', ' ', '/'],
         [' ', '/', ' ', '/', ' '],
         ['/', '_', '_', '_', '|'],
-        [' ', ' ', ' ', ' ', ' '],        
+        [' ', ' ', ' ', ' ', ' '],
     ],
-    maxHeadOverlap: 5,
-    maxTailOverlap: 5,
+    max_head_overlap: 5,
+    max_tail_overlap: 5,
 }
