@@ -14,12 +14,8 @@
 ```roc
 import art.Art
 
-main : Task {} _
-main =
-    Stdout.line! ("ASCII-echo" |> Art.strToArtTrimmed)
-    Stdout.write! "Enter some text: "
-    input = Stdin.line! 
-    Stdout.line! (input |> Art.strToArt)
+main! = |_|
+    Stdout.line!("Super Cool ASCII Text!" |> Art.str_to_art)
 ```
 
 [roc_badge]: https://img.shields.io/endpoint?url=https%3A%2F%2Fpastebin.com%2Fraw%2FcFzuCCd7
